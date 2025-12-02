@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
-from app.models.users import UserModel
+from app.models.waiters_statistics import UserModel
 from app.repositories.base import BaseRepository
 from app.schemes.users import SUserGet
 from app.schemes.relations_users_roles import SUserGetWithRels
