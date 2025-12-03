@@ -6,16 +6,17 @@ from app.database.database import Base
 from app.models.tables import TablesModel
 
 if TYPE_CHECKING:
-    from app.models.orders import OrdersModel
+    from app.models.order import OrderModel
 
 
-class OrdersModel(Base):
-    __tablename__ = "orders"
+class OrderModel(Base):
+    __tablename__ = "order"
     id: Mapped[int] = mapped_column(primary_key=True)
     table_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
     cook_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
-    waiter_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
+    waiters_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
     status: Mapped[str] = mapped_column(String(255), nullable=False, default="Создан")
     
-table_id: Mapped[list["TablesModel"]] = relationship(back_populates="tables")
-
+    table: Mapped["OrderModel"] = relationship(back_populates="tables")
+    waiters: Mapped["OrderModel"] = relationship(back_populates="waiters")
+    cook: Mapped["OrderModel"] = relationship(back_populates="cook")

@@ -5,15 +5,16 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database.database import Base
 
 if TYPE_CHECKING:
-    from app.models.waiters_statistics import WaitersStatisticsModel
+    from app.models.waiter_statistics import WaiterStatisticsModel
 
 
 class WaiterStatisticsModel(Base):
-    __tablename__ = "waiters_statistics"
+    __tablename__ = "waiter_statistics"
     id: Mapped[int] = mapped_column(primary_key=True)
-    waiter_id: Mapped[int] = mapped_column(primary_key=True)
+    waiter_id: Mapped[int] = mapped_column()
     total_orders: Mapped[int] = mapped_column(primary_key=True)
     occupied_tables: Mapped[int] = mapped_column(primary_key=True)
-    last_updated: Mapped[VARCHAR] = mapped_column(String(255), nullable=True)
+    last_updated: Mapped[int] = mapped_column(String(255), primary_key=True)
 
-    waiter_id: Mapped[list["WaitersModel"]] = relationship(back_populates="waiters")
+    waiter: Mapped["WaiterStatisticsModel"] = relationship(back_populates="waiters")
+

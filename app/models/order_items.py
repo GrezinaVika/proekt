@@ -15,3 +15,5 @@ class OrderItemsModel(Base):
     menu_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
     quantity: Mapped[int] = mapped_column(primary_key=True, nullable=True)
     price: Mapped[int] = mapped_column(nullable=False)
+
+    order: Mapped["OrderItemsModel"] = relationship(back_populates="order")
